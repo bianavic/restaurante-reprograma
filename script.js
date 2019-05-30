@@ -24,13 +24,13 @@
 ]} */
 
 const container = document.querySelector('#items-cardapio')
- fetch(`https://localhost:3000/comidas`)
+ fetch(`http://localhost:3000/comidas`)
      .then((response) =>{
          return response.json();
      })
      .then((data) =>{
 
-        data.comida.forEach(prato => {
+        data.comidas.forEach(prato => {
             console.log(prato)
 
             const mediaItem = document.createElement('div');
