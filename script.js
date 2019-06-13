@@ -1,28 +1,3 @@
-/* const comidas = {
-  comidas: [
-  {
-    nome: "Batata frita",
-    descricao: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. ",
-    imagem: "img/Batata-frita.jpg"
-  },
-  {
-    nome: "Macarronada",
-    descricao: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. ",
-    imagem: "img/macarronada.jpg"
-  },
-  {
-    nome: "Falafel",
-    descricao: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. ",
-    imagem: "img/falafel.jpg"
-  },
-  {
-    nome: "Creme de abóbora",
-    descricao: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. ",
-    imagem: "img/creme-de-abobora.jpg"
-  },
-
-]} */
-
 const container = document.querySelector('#items-cardapio')
  fetch(`http://localhost:3000/comidas`)
      .then((response) =>{
@@ -30,7 +5,7 @@ const container = document.querySelector('#items-cardapio')
      })
      .then((data) =>{
 
-        data.comidas.forEach(prato => {
+        data.forEach(prato => {
             console.log(prato)
 
             const mediaItem = document.createElement('div');
@@ -51,3 +26,25 @@ const container = document.querySelector('#items-cardapio')
      .catch((erro)=>{
          console.log(erro)
      })
+
+     const botao = document.querySelector('#criar_comida_button')
+     botao.addEventListener('click', criarComida)
+
+     function criarComida () {
+      const nome = document.querySelector("#nome_input").value
+      const descricao = document.querySelector("#descricao_input").value
+      const imagem = document.querySelector("#imagem_input").value
+      const comida = {
+        nome, descricao, imagem
+      }
+      fetch(
+        'http://localhost:3000/comidas',
+        {
+          method: 'POST',
+          body: JSON.stringify(comida),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      ).then(response => console.log("criou!"))
+     }
